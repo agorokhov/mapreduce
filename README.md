@@ -73,7 +73,7 @@ Windows:
 		$ pscp -P <PORT> <LOCAL_PATH> <YOUR_LOGIN>@<HOST>:<REMOTE_PATH>
 
 Не забывайте еще ключ `-r` если копируете директорию.
-Прорамма `pscp` под Windows идет вместе с PuTTY, поэтому чтобы она была доступна, надо прописать путь к ней в переменной окружения `PATH`.
+Программа `pscp` под Windows идет вместе с PuTTY, поэтому чтобы она была доступна, надо прописать путь к ней в переменной окружения `PATH`. Более подробно про pscp: [http://the.earth.li/~sgtatham/putty/0.60/htmldoc/Chapter5.html](http://the.earth.li/~sgtatham/putty/0.60/htmldoc/Chapter5.html)
 
 Другой способ для Windows - программа WinSCP. При подключении указывайте протокол передачи SCP и номер порта должен быть не 22, а пятизначный, как в реквизитах кластера.
 
