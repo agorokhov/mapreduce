@@ -39,7 +39,7 @@ mapreduce
 
 	Прочитать 20 строк файла:
 
-		$ hadoop fs -cat hadoop fs -cat /user/<YOUR_LOGIN>/out/part-r-00000 | head -20
+		$ hadoop fs -cat /user/<YOUR_LOGIN>/out/part-r-00000 | head -20
 
 	Скачать файл на сервер:
 
