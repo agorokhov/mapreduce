@@ -176,22 +176,30 @@ IDEA умеет генерировать Ant-файлы целей (Build->Gener
 
 ## Типичные ошибки и недочеты
 
-### MapReduce 
+### 1. MapReduce 
 
 1. У Hadoop есть 2 Java API: старый и новый. О различиях есть в книжке Вайта и тут: [http://ruhadoop.blogspot.ru/2012/07/hadoop-api.html]([http://ruhadoop.blogspot.ru/2012/07/hadoop-api.html] "Старый и новый Hadoop API"). Можно использовать старый API (там, где это не запрещено в условии задачи), а вообще желательно новый.
 
 1. Для глобальной сортировки надо явно указывать 1 редьюсер
 
-2. Если на входе задачи текст, где ключ отделен от значения табом, то используйте KeyValueTextInputFormat.
+1. Если на входе задачи текст, где ключ отделен от значения табом, то используйте KeyValueTextInputFormat.
 	
 	Если задача решается в две Job'ы и первая выводит в TextOutputFormat, то на входе второй лучше использовать KeyValueTextInputFormat. Читаем у Вайта:
  
 	> **KeyValueTextInputFormat**
 	> TextInputFormat’s keys, being simply the offset within the file, are not normally very useful. It is common for each line in a file to be a key-value pair, separated by a delimiter such as a tab character. For example, this is the output produced by  TextOutputFormat, Hadoop’s default  OutputFormat. To interpret such files correctly,  KeyValueTextInputFormat is appropriate.
 
-3. Обратите внимание на стандартные `IntSumReducer, InverseMapper, ChainMapper, ChainReducer`. Найдите их в книжке, там есть еще полезные классы. Использовать их предпочтительней, чем собственные.
+1. Обратите внимание на стандартные `IntSumReducer, InverseMapper, ChainMapper, ChainReducer`. Найдите их в книжке, там есть еще полезные классы. Использовать их предпочтительней, чем собственные.
 
-### Оформление кода
+1. Если задача решается в 2 и более Job'ы, результат 1й задачи придется сохранять в временной директории. В качестве временной директории можно брать outputPath + некий (случайный) суффикс или '/tmp/' + суффикс. В качестве "случайного" слова можно брать текущее время в unixtime или число миллисекунд. По окончании временную директорию надо удалить. 
+
+	Заставлять пользователя указывать временную директорию в параметрах задачи - негуманно. Если делаете временную директорию в своей домашней папке - значит ни у кого кроме вас этот код не отработает.
+
+### 2. Java
+
+1. В регулярных выражениях используйте классы символов из [Pattern](http://docs.oracle.com/javase/7/docs/api/index.html?java/util/regex/Pattern.html). Даже если парсите английскую Википедию - это не гарантирует, что там только латинские символы.
+
+### 3. Оформление кода
 
 Ошибками на является, но стоит учесть.
 
